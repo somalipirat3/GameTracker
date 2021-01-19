@@ -16,3 +16,15 @@ class Api::V1::ApexlegendsController < ApplicationController
     end
 
 end
+
+# legend 
+#     belongs_to member
+#     belongs_to game
+#     name: uniq
+#     imageUrl: [link_to_image],
+#     bgImageUrl: [link_to_image],
+#     tallImageUrl: [link_to_image],
+
+
+# member 
+#     has_many legends
