@@ -21,10 +21,14 @@ class ConsumeApi::Tracker
     private
 
     def create_user
-        player =  Player.where(username: @data[:username]).first || Player.create!(username: @data[:username])
-        game = Game.where(title: "Apex Legends").first
-        game.members.build(player_id: player.id, identifier: "#{player.id.to_s}|#{game.id.to_s}")
-        return { player: player.username, game: game, game_members: game.members }
+        player =  Player.find_or_create_by(username: @data[:username])
+        game = Game.find_by(title: "Apex Legends")
+        game.members.find_or_create_by(player_id: player.id, identifier: "#{player.id.to_s}|#{game.id.to_s}")
+        return { 
+            player: player.username, 
+            game: game, 
+            game_members: game.members.map { |member| { player: member.player} }
+        }
     end
 
         # def set_player
