@@ -7,8 +7,8 @@ module ConsumeApi
 
         def initialize(options)
             @data = options
-            @api_key = '69bbd61VKVukQpqUyxXw' 
-            @endpoint = 'https://api.mozambiquehe.re/bridge?version=4'  
+            @api_key = Rails.application.credentials.api_keys[:ala][:key]
+            @endpoint = Rails.application.credentials.api_keys[:ala][:endpoint]
         end
 
         def legend
@@ -18,7 +18,10 @@ module ConsumeApi
                 response = JSON.parse(response.parsed_response)['legends']['selected']
                 return {
                     legend: response['LegendName'],
-                    ImgAssets: response['ImgAssets'],
+                    img_assets: {
+                        avatar: response['ImgAssets']['icon'],
+                        banner: response['ImgAssets']['banner']
+                    },
                     stats: response['data']
                 }
             else
