@@ -1,5 +1,6 @@
 # ala = Apex Legends Api
 # consume apexlegendsapi.com
+# back up api segments only
 module ConsumeApi
     
     class Ala

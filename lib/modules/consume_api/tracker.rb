@@ -1,4 +1,5 @@
 # Tracker.gg api
+# Full profile requests 
 class ConsumeApi::Tracker
     include HTTParty
 
@@ -30,23 +31,5 @@ class ConsumeApi::Tracker
             game_members: game.members.map { |member| { player: member.player} }
         }
     end
-
-        # def set_player
-        #     begin
-        #         player = Player.create!(username: @data[:username])
-        #         add_player_to_game_list(player.id)
-        #     rescue Mongo::Error::OperationFailure => e
-        #         player = Player.where(username: @data[:username]).first
-        #     end
-        # end
-
-        # def add_player_to_game_list(player_id)
-        #     begin
-        #         game = Game.where(title: "Apex Legends").first
-        #         Member.create!(game_id: game.id, player_id: player_id)
-        #     rescue Mongo::Error::OperationFailure => e
-        #         player = Player.where(username: @data[:username]).first
-        #     end
-        # end
 
 end
