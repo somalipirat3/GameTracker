@@ -28,5 +28,5 @@ module ConsumeApi
             error: msg
         }, status: 400
     end
-    
+
 end
