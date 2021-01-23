@@ -5,16 +5,23 @@ class Api::V1::ApexlegendsController < ApplicationController
         render json: api[:search_result]
     end
 
+    def scrapper_test
+        api = ConsumeApi.apexlegends_data({request_type: 'profile', platform: params[:platform], username: params[:username]})
+        render json: api
+    end
+
     def search 
         legends = Legend.all
+        players = Player.where('$text' => {'$search' => params[:username]}).to_a
 
-        render json: Player.all.map{|player| 
+        render json: players.map{|player| 
             {
                 playerDisplayeName: player.username,
+                legends: legends,
                 playerDisplayeid: player.id,
                 playerPlatform: player.platform,
                 members: player.members.map { |member| { identifier: member.identifier, game: member.game }},
-                stats: legends.map { |legend| {legendDisplayName: legend.name, stats: legend.stats} }
+                stats: player.stats.map { |stat| stat.data }
             }
         }
     end

@@ -1,5 +1,15 @@
 module ConsumeApi
 
+    def self.apexlegends_data options = {}
+        api = ConsumeApi::TrackerDataOnly.new({username: options[:username], platform: options[:platform]})
+        return {
+            api: "Tracker GG With Proccessor",
+            options: options,
+            player: api.player,
+            segments: api.segments
+        }
+    end
+
     def self.apex_legends options = {}
         if (["origin", "psn" , "xbl"].include? options[:platform])
             api = ConsumeApi::Tracker.new({username: options[:username], platform: options[:platform]})
@@ -22,6 +32,7 @@ module ConsumeApi
             })
         end
     end
+
 
     def self.render_error_msg msg = 'error'
         return {

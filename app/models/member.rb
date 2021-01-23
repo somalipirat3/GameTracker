@@ -11,7 +11,7 @@ class Member
 
 
   def set_member
-    self.identifier =  "#{self.player_id.to_s}|#{self.game_id.to_s}"
+    identifier =  "#{self.player_id.to_s}|#{self.game_id.to_s}"
   end
 
 end

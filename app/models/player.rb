@@ -7,5 +7,8 @@ class Player
   field :username, type: String
   field :platform, type: String
   field :avatar_url, type: String
+  
   index({ username: 1 }, { unique: true, name: "username_index" })
+  index username: 'text'
+
 end
