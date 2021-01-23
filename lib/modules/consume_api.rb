@@ -1,13 +1,19 @@
 module ConsumeApi
 
     def self.apexlegends_data options = {}
-        api = ConsumeApi::TrackerDataOnly.new({username: options[:username], platform: options[:platform]})
-        return {
-            api: "Tracker GG With Proccessor",
-            options: options,
-            player: api.player,
-            segments: api.segments
+        api = TrackerDataOnly.new({username: options[:username], platform: options[:platform]})
+        
+        segments_recoreds = 0
+        stats = []
+
+        api.segments.map{|seg|
+            segments_recoreds =+ 1
+            stats << seg
         }
+
+        save_data =  SaveData.new({player: api.player, stats: stats})
+
+        return save_data
     end
 
     def self.apex_legends options = {}

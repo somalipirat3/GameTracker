@@ -15,9 +15,6 @@ class Stat
   field :identifier, type: String
 
   index({ identifier: 1 }, { unique: true, name: "identifier_index" })
-  # displayName| player | legend
-
-
   def data
     return {
       rank: rank,
@@ -32,5 +29,17 @@ class Stat
       identifier: identifier
     }
   end
+
+
+  # displayName| player | legend
+
+  before_create :generate_identifier
+
+  protected
+
+  def generate_identifier
+   self.identifier = "#{self.displayName}|#{self.player_id.to_s}|#{self.legend_id.to_s}"
+  end
+
 
 end

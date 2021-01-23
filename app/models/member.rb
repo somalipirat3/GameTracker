@@ -7,11 +7,12 @@ class Member
 
   index({ identifier: 1 }, { unique: true, name: "identifier_index" })
 
-  before_create :set_member
+  before_create :generate_identifier
 
+  protected
 
-  def set_member
-    identifier =  "#{self.player_id.to_s}|#{self.game_id.to_s}"
+  def generate_identifier
+   self.identifier = "#{self.player_id.to_s}|#{self.game_id.to_s}"
   end
 
 end

@@ -20,8 +20,8 @@ class ConsumeApi::TrackerDataOnly
         @response['data']['segments'].each do |segment|
             if segment['type'] == "legend"
                 segments << {
-                    legendDisplayName: legend(segment),
-                    stats: stats(segment)
+                    legendName: legend(segment),
+                    stat: stats(segment)
                 }
             end
         end
@@ -42,8 +42,7 @@ class ConsumeApi::TrackerDataOnly
                 metadata: stat[1]['metadata'],
                 value: stat[1]['value'],
                 displayValue: stat[1]['displayValue'],
-                displayType: stat[1]['displayType'],
-                identifier: stat[1]['identifier']
+                displayType: stat[1]['displayType']
             }
         end
         return new_stats

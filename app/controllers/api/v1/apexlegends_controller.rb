@@ -6,8 +6,8 @@ class Api::V1::ApexlegendsController < ApplicationController
     end
 
     def scrapper_test
-        api = ConsumeApi.apexlegends_data({request_type: 'profile', platform: params[:platform], username: params[:username]})
-        render json: api
+        results = ConsumeApi.apexlegends_data({request_type: 'profile', platform: params[:platform], username: params[:username]})
+        render json: results
     end
 
     def search 
