@@ -31,9 +31,9 @@ class ConsumeApi::TrackerDataOnly
     private
 
     def stats(stats)
-        new_stats = {}
+        new_stats = []
         stats['stats'].each do |stat|
-            new_stats = {
+            new_stats.push({
                 rank: stat[1]['rank'],
                 percentile: stat[1]['percentile'],
                 displayName: stat[1]['displayName'],
@@ -43,7 +43,7 @@ class ConsumeApi::TrackerDataOnly
                 value: stat[1]['value'],
                 displayValue: stat[1]['displayValue'],
                 displayType: stat[1]['displayType']
-            }
+            })
         end
         return new_stats
     end

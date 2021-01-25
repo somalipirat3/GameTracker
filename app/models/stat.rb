@@ -38,7 +38,12 @@ class Stat
   protected
 
   def generate_identifier
-   self.identifier = "#{self.displayName}|#{self.player_id.to_s}|#{self.legend_id.to_s}"
+    if self.displayName
+      self.identifier = "#{self.displayName}|#{self.player_id.to_s}|#{self.legend_id.to_s}"
+    else
+      no_display_name = "NO_DISPLAY_NAME#{Time.now}"
+      self.identifier = "#{no_display_name}|#{self.player_id.to_s}|#{self.legend_id.to_s}"
+    end
   end
 
 

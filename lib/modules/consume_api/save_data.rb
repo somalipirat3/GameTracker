@@ -22,11 +22,13 @@ class ConsumeApi::SaveData
     def player
         username = @data[:player]['platformUserId'].to_s
         platform = @data[:player]['platformSlug'].to_s
-        Player.find_or_create_by(username: username, platform: platform)
+        avatar = @data[:player]['avatarUrl'].to_s
+        # .update_attributes!()
+        player = Player.find_or_create_by(username: username, platform: platform, avatar_url: avatar)
     end
 
     def set_membership
-        Member.find_or_create_by(game_id: game[:id], player_id: player.id)
+        # Member.find_or_create_by(game_id: game[:id], player_id: player.id)
     end
 
     def stats
@@ -34,18 +36,23 @@ class ConsumeApi::SaveData
         @data[:stats].each do |stat|
             @saved_stats = @saved_stats +1
             legend = find_legend(stat[:legendName])
-            stat = Stat.find_or_create_by(player_id: player.id, legend_id: legend.id)
-            .update_attributes!(
-                rank: stat[:stat][:rank].to_s,
-                percentile: stat[:stat][:percentile].to_s,
-                displayName: stat[:stat][:displayName].to_s,
-                displayCategory: stat[:stat][:displayCategory].to_s,
-                category: stat[:stat][:category],
-                metadata: stat[:stat][:metadata],
-                value: stat[:stat][:value],
-                displayValue: stat[:stat][:displayValue],
-                displayType: stat[:stat][:displayType]
-            )
+            stat[:stat].each do |s|
+
+                stat = Stat.find_or_create_by(player_id: player.id, legend_id: legend.id, displayName: s[:displayName].to_s)
+                .update_attributes!(
+                    rank: s[:rank].to_s,
+                    percentile: s[:percentile].to_s,
+                    displayCategory: s[:displayCategory].to_s,
+                    category: s[:category],
+                    metadata: s[:metadata],
+                    value: s[:value],
+                    displayValue: s[:displayValue],
+                    displayType: s[:displayType]
+                )
+
+            end
+            
+            
             
         end
 
