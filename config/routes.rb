@@ -12,7 +12,8 @@ Rails.application.routes.draw do
       get '/apexlegends/scrapper/:platform/:username', to: 'apexlegends#scrapper_test'
       
       get '/apexlegends/profiles/:platform/:username', to: 'profiles#show'
-      get '/apexlegends/profiles/search/:platform/:username', to: 'profiles#search'
+      get '/apexlegends/profiles/search', to: 'profiles#search' # params platform and username
+      # get '/apexlegends/profiles/search/:platform/:username', to: 'profiles#search'
 
 
     end
