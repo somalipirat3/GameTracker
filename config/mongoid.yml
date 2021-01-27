@@ -5,6 +5,8 @@ development:
       hosts:
         - localhost:27017
       options:
+        username: <%= "#{ENV['MONGO_INITDB_ROOT_USERNAME']}" %>
+        password: <%= "#{ENV['MONGO_INITDB_ROOT_PASSWORD']}" %>
   options:
 
 production:
@@ -14,6 +16,8 @@ production:
       hosts:
         - <%= "#{ENV['MONGODB_HOST']}:#{ENV['MONGODB_PORT']}" %>
       options:
+        username: <%= "#{ENV['MONGO_INITDB_ROOT_USERNAME']}" %>
+        password: <%= "#{ENV['MONGO_INITDB_ROOT_PASSWORD']}" %>
   options:
 
 
@@ -24,6 +28,8 @@ test:
       hosts:
         - localhost:27017
       options:
+        username: <%= "#{ENV['MONGO_INITDB_ROOT_USERNAME']}" %>
+        password: <%= "#{ENV['MONGO_INITDB_ROOT_PASSWORD']}" %>
         read:
           mode: :primary
         max_pool_size: 1
